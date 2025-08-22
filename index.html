@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi Hoja de Vida</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-dark text-white">
+
+
+  <header class="text-center p-4 bg-dark text-white">
+    <img src="Joker.jpg" alt="Foto de presentación" class="rounded-circle mb-3" width="150">
+    <h1>Mi Hoja de Vida</h1>
+    <p>“Estudiante de 5° semestre de Tecnologia en sistemas de información y de software con conocimientos en desarrollo web y móvil. Interesado en aprender nuevas tecnologías y aplicar mis habilidades en proyectos reales.</p>
+  </header>
+
+  <main class="container mt-4">
+    <!-- Historial académico -->
+    <section class="mb-5">
+      <h2 class="text-primary">Historial Académico</h2>
+      <div class="input-group mb-3">
+        <input type="text" id="inputAcademico" class="form-control" placeholder="Agregar estudio">
+        <button id="btnAcademico" class="btn btn-success">Añadir</button>
+      </div>
+      <ul id="listaAcademica" class="list-group"></ul>
+    </section>
+
+    <!-- Historial laboral -->
+    <section class="mb-5">
+      <h2 class="text-primary">Historial Laboral</h2>
+      <div class="input-group mb-3">
+        <input type="text" id="inputLaboral" class="form-control" placeholder="Agregar trabajo">
+        <button id="btnLaboral" class="btn btn-success">Añadir</button>
+      </div>
+      <ul id="listaLaboral" class="list-group"></ul>
+    </section>
+
+    <!-- Habilidades -->
+    <section class="mb-5">
+      <h2 class="text-primary">Habilidades</h2>
+      <div class="input-group mb-3">
+        <input type="text" id="inputSkill" class="form-control" placeholder="Agregar habilidad o idioma">
+        <button id="btnSkill" class="btn btn-success">Añadir</button>
+      </div>
+      <ul id="listaSkills" class="list-group"></ul>
+    </section>
+  </main>
+
+  <footer class="text-center p-3 bg-dark text-white">
+    <p>&copy; 2025 Mi Hoja de Vida</p>
+  </footer>
+
+  <!-- Bootstrap JS (opcional, para componentes interactivos) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    // ---- Función generica para listas dinámicas ----
+    function listaDinamica(inputId, buttonId, listaId) {
+      const input = document.getElementById(inputId);
+      const button = document.getElementById(buttonId);
+      const lista = document.getElementById(listaId);
+
+      button.addEventListener("click", () => {
+        const texto = input.value.trim();
+        if (texto === "") return;
+        input.value = "";
+
+        const listItem = document.createElement("li");
+        listItem.className = "list-group-item d-flex justify-content-between align-items-center";
+
+        const listText = document.createElement("span");
+        const listBtn = document.createElement("button");
+
+        listText.textContent = texto;
+        listBtn.textContent = "Eliminar";
+        listBtn.className = "btn btn-sm btn-outline-danger";
+
+        listItem.appendChild(listText);
+        listItem.appendChild(listBtn);
+        lista.appendChild(listItem);
+
+        listBtn.addEventListener("click", () => {
+          lista.removeChild(listItem);
+        });
+
+        input.focus();
+      });
+    }
+
+    // Inicializar listas dinámicas
+    listaDinamica("inputAcademico", "btnAcademico", "listaAcademica");
+    listaDinamica("inputLaboral", "btnLaboral", "listaLaboral");
+    listaDinamica("inputSkill", "btnSkill", "listaSkills");
+  </script>
+
+</body>
+</html>
+
